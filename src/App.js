@@ -11,6 +11,10 @@ function App() {
 		fetch('https://api.github.com/users').then(resopnce => resopnce.json()).then(setInfo)
 	}, [])
 
+	useEffect(() => {
+
+	}, [])
+
   return (
 		<>
 		<div>
