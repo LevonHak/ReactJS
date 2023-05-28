@@ -16,6 +16,7 @@ function App() {
 
 		const user = useMemo(() => {createUser(name, surname)}, [name, surname])
 
+	
   return (
 		<div>
 		<button onClick={() => {setCount(count + 1)}}> Clicked {count} times</button>		
