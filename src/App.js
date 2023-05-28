@@ -1,28 +1,32 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useMemo } from "react";
 
+function createUser(name, surname) {
+	const user = {name, surname};
 
+	console.log(user);
+
+	return user
+}
 
 function App() {
 
-	 const [info, setInfo] = useState([])
-	
+	const [name, setName] = useState('');
+	const [surname, setSurname] = useState('');
+	const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		fetch('https://api.github.com/users').then(resopnce => resopnce.json()).then(setInfo)
-	}, [])
+		const user = useMemo(() => {createUser(name, surname)}, [name, surname])
 
   return (
-		<>
 		<div>
-			{
-				info.map(item =><div key={item.id}>
-						<p>{item.id} <br /> {item.login} <br /></p>
-						<img src={item.avatar_url} alt=""/>
-					</div>
-				)
-			}
+		<button onClick={() => {setCount(count + 1)}}> Clicked {count} times</button>		
+		<br />
+
+		<input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+		<input type="text" value={surname} onChange={(e) => setSurname(e.target.value)}/>
+
+		<br />
+		<pre>{JSON.stringify(user, null, 2)}</pre>
 		</div>
-		</>
   );
 }
 
