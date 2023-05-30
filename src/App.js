@@ -1,31 +1,22 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useRef } from 'react';
 
-
-
-function App() {
-
-	 const [info, setInfo] = useState([])
 	
+	function App() {
 
-	useEffect(() => {
-		fetch('https://api.github.com/users').then(resopnce => resopnce.json()).then(setInfo)
-	}, [])
+		const [count, setCount] = useState(0)
+		const testRef = useRef(null);
 
-  return (
-		<>
-		<div>
-			{
-				info.map(item =><div key={item.id}>
-						<p>{item.id} <br /> {item.login} <br /></p>
-						<img src={item.avatar_url} alt=""/>
-					</div>
-				)
-			}
-		</div>
-		</>
-  );
-}
+		function changeTest(){
+			testRef.current.value = Number(testRef.current.value) + 1;
+		}
 
-export default App;
+			return (
+				<div>
+					 	<input type="text" ref={testRef}/>
+						<button onClick={changeTest}>Change Test</button>
+						<button onClick={() => {setCount(count + 1); console.log(count)}}>Change Count</button>
+				</div>
+			);
+		}
 
-
+		export default App;
